@@ -1,7 +1,9 @@
-package com.example.mymemories;
+package com.example.mymemories.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 
+import com.example.mymemories.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -51,5 +53,10 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void registration(View view){
+        Intent intent = new Intent(this, RegistrationActivity.class);
+        startActivity(intent);
     }
 }
