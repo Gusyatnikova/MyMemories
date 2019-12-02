@@ -59,4 +59,9 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, RegistrationActivity.class);
         startActivity(intent);
     }
+
+    public void authorization(View view){
+        Intent intent = new Intent(this, Authorization.class);
+        startActivity(intent);
+    }
 }
