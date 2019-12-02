@@ -1,13 +1,13 @@
 package com.example.mymemories.controller;
 
 
-        import android.content.ContentValues;
-        import android.content.Context;
-        import android.database.Cursor;
-        import android.database.sqlite.SQLiteDatabase;
-        import android.text.TextUtils;
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.text.TextUtils;
 
-        import com.example.mymemories.model.AuthorizationContract.AuthorizationEntry;
+import com.example.mymemories.model.AuthorizationContract.AuthorizationEntry;
 
 public class RegistrationController {
     private AuthorizationDataBaseHelper dataBaseHelper;
@@ -20,20 +20,20 @@ public class RegistrationController {
         dataBaseHelper = new AuthorizationDataBaseHelper(context);
     }
 
-    public void registrate(String _login, String _password, String _email) {
+    public void registrate(String _login, String _password, String _email) throws CustomException{
         if(validate(_login, _password, _email))
             doInsert(_login, _password, _email);
     }
 
-    private boolean validate(String _login, String _password, String _email) {
+    private boolean validate(String _login, String _password, String _email) throws CustomException{
         if (_login.isEmpty() || _password.isEmpty() || _email.isEmpty())
-            return false;
+            throw new CustomException("Field mustn't be empty");
         else if(_password.length() < 6)
-            return false;
+            throw new CustomException("Password must be longer than 6 characters");
         else if(!isValidEmail(_email))
-            return false;
+            throw new CustomException("Wrong e-mail address");
         else if(doSelect(_login, _password))
-            return false;
+            throw new CustomException("This login is already used");
         else return true;
     }
 

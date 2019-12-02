@@ -8,6 +8,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.mymemories.R;
+import com.example.mymemories.controller.CustomException;
 import com.example.mymemories.controller.RegistrationController;
 
 public class RegistrationActivity extends AppCompatActivity {
@@ -29,8 +30,16 @@ public class RegistrationActivity extends AppCompatActivity {
         String _login = login.getText().toString();
         String _pswd = pswd.getText().toString();
         String _email = email.getText().toString();
-        controller.registrate(_login, _pswd, _email);
-        //Intent intent = new Intent(this, next.class);
+        try{
+            controller.registrate(_login, _pswd, _email);
+        }catch(CustomException e){
+            Toast.makeText(view.getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+            login.setText("");
+            pswd.setText("");
+            email.setText("");
+            return;
+        }
+        //Intent intent = new Intent(this, sdfsfd.class);
         //startActivity(intent);
     }
 }
