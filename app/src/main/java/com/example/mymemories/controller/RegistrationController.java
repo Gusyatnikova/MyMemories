@@ -43,6 +43,19 @@ public class RegistrationController {
 
     //Функции для работы с базой данных
     private boolean doSelect(String _login, String _password){return false;}
-    public void doInsert(String _login, String _password, String _email){}
-    public void delete(String _login, String _password){}
+    public void doInsert(String _login, String _password, String _email) {
+        SQLiteDatabase db = dataBaseHelper.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(AuthorizationEntry.LOGIN, _login);
+        values.put(AuthorizationEntry.PASSWORD, _password);
+        values.put(AuthorizationEntry.EMAIL, _email);
+
+        db.insert(AuthorizationEntry.TABLE_NAME, null, values);
+    }
+
+    public void delete(String _login, String _password){
+        SQLiteDatabase db = dataBaseHelper.getReadableDatabase();
+        db.delete(AuthorizationEntry.TABLE_NAME, "Login=? and Password=?",new String[]{_login, _password});
+    }
 }
