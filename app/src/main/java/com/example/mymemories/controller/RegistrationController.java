@@ -41,8 +41,56 @@ public class RegistrationController {
         return (!TextUtils.isEmpty(target)) && android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
     }
 
-    //Функции для работы с базой данных
-    private boolean doSelect(String _login, String _password){return false;}
+    /**Функция нахождения в базе данных е-мейла по логину и паролю
+     * Используется также для проверки дублирования логинов
+     *
+     * @param _login
+     * @param _password
+     * @return
+     */
+    private boolean doSelect(String _login, String _password){
+        String selection;
+        SQLiteDatabase db = dataBaseHelper.getReadableDatabase();
+        String[] projection = {
+                AuthorizationEntry.EMAIL,};
+        String[] selectionArgs;
+        selection = AuthorizationEntry.LOGIN + "=? AND " + AuthorizationEntry.PASSWORD + "=?";
+        selectionArgs = new String[]{_login, _password};
+        /*    selection = AuthorizationEntry.LOGIN + "=?";
+            selectionArgs = new String[]{login};
+        */
+        Cursor cursor = db.query(
+                AuthorizationEntry.TABLE_NAME, // таблица
+                projection,            // столбцы
+                selection,             // столбцы для условия WHERE
+                selectionArgs,         // значения для условия WHERE
+                null,                  // Don't group the rows
+                null,                  // Don't filter by row groups
+                AuthorizationEntry.EMAIL + " DESC");  // порядок сортировки
+        try {
+            while (cursor.moveToNext()) {
+                String currentEmail = cursor.getString(cursor.getColumnIndex(AuthorizationEntry.EMAIL));
+                if (currentEmail.isEmpty())
+                    return false;
+                else {
+                    login = _login;
+                    password = _password;
+                    email = currentEmail;
+                    return true;
+                }
+            }
+        } finally {
+            cursor.close();
+        }
+        return false;}
+
+    /** Функция добавления пользователя в базу данных
+     *
+     * @param _login
+     * @param _password
+     * @param _email
+     */
+
     public void doInsert(String _login, String _password, String _email) {
         SQLiteDatabase db = dataBaseHelper.getWritableDatabase();
 
@@ -53,6 +101,12 @@ public class RegistrationController {
 
         db.insert(AuthorizationEntry.TABLE_NAME, null, values);
     }
+
+    /** Функция удаления пользователя из базы данных
+     *
+     * @param _login
+     * @param _password
+     */
 
     public void delete(String _login, String _password){
         SQLiteDatabase db = dataBaseHelper.getReadableDatabase();
