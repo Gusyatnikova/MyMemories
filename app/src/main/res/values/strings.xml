@@ -9,4 +9,7 @@
     <string name="password">Пароль:</string>
     <string name="e_mail">E-mail:</string>
     <string name="registration">Регистрация</string>
+    <string name="authorization">Авторизация</string>
+    <string name="enter">Войти</string>
+    <string name="register">Не зарегистрированы? Зарегистрироваться</string>
 </resources>
