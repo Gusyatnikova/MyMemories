@@ -1,2 +1,2 @@
-include ':app'
+include ':MyMemories'
 rootProject.name='MyMemories'
