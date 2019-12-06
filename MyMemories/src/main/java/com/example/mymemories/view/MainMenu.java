@@ -1,10 +1,9 @@
 package com.example.mymemories.view;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
-
 import com.example.mymemories.R;
+import com.example.mymemories.controller.NotesController;
 
 public class MainMenu extends AppCompatActivity {
 
