@@ -23,6 +23,10 @@ public class NotesController {
         doSelect(login);
     }
 
+    public void addNote(String login, String title, String content, String res){
+        doInsert(login, title, content, res);
+    }
+
     private void doSelect(String login){
         String selection;
         SQLiteDatabase db = dataBaseHelper.getReadableDatabase();
@@ -53,5 +57,28 @@ public class NotesController {
         } finally {
             cursor.close();
         }
+    }
+
+    /** Функция добавления записки пользователя в базу данных
+     *
+     * @param login
+     * @param title
+     * @param content
+     * @param resources
+     */
+
+    private void doInsert(String login, String title, String content, String resources) {
+        SQLiteDatabase db = dataBaseHelper.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        Date currentDay = Calendar.getInstance().getTime();
+        values.put(NotesEntry.LOGIN, login);
+        values.put(NotesEntry.DATE, currentDay.toString());
+        values.put(NotesEntry.TITLE, title);
+        values.put(NotesEntry.CONTENT, content);
+        values.put(NotesEntry.RESOURCES, resources);
+
+        db.insert(NotesEntry.TABLE_NAME, null, values);
+        Log.d(LOG_TAG, "added");
     }
 }
