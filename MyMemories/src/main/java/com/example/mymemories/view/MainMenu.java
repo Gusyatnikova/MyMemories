@@ -7,12 +7,9 @@ import com.example.mymemories.controller.NotesController;
 
 public class MainMenu extends AppCompatActivity {
 
-    private NotesController controller;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
-        controller = new NotesController(this.getApplicationContext());
     }
 }

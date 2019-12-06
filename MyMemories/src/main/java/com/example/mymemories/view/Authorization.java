@@ -11,11 +11,13 @@ import android.widget.Toast;
 import com.example.mymemories.R;
 import com.example.mymemories.controller.AuthorizationController;
 import com.example.mymemories.controller.CustomException;
+import com.example.mymemories.controller.NotesController;
 
 public class Authorization extends AppCompatActivity {
     private EditText login;
     private EditText password;
     static AuthorizationController controller;
+    static NotesController notesController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +26,7 @@ public class Authorization extends AppCompatActivity {
         login = findViewById(R.id.login);
         password = findViewById(R.id.password);
         controller = new AuthorizationController(this.getApplicationContext());
+        notesController = new NotesController(this.getApplicationContext());
     }
 
     public void authorization(View view){
@@ -38,6 +41,9 @@ public class Authorization extends AppCompatActivity {
             return;
         }
         //Toast.makeText(view.getContext(), "Enter success", Toast.LENGTH_SHORT).show();
+
+        notesController.selectUserNotes(_login);
+
         Intent intent = new Intent(this, MainMenu.class);
         startActivity(intent);
     }
