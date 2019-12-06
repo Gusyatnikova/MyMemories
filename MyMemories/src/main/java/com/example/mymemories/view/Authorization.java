@@ -37,9 +37,9 @@ public class Authorization extends AppCompatActivity {
             password.setText("");
             return;
         }
-        Toast.makeText(view.getContext(), "Enter success", Toast.LENGTH_SHORT).show();
-        //Intent intent = new Intent(this, MainMenu.class);
-        //startActivity(intent);
+        //Toast.makeText(view.getContext(), "Enter success", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, MainMenu.class);
+        startActivity(intent);
     }
 
     public void register(View view){

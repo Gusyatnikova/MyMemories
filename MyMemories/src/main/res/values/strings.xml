@@ -12,4 +12,5 @@
     <string name="authorization">Авторизация</string>
     <string name="enter">Войти</string>
     <string name="register">Не зарегистрированы? Зарегистрироваться</string>
+    <string name="AddNote">+</string>
 </resources>
