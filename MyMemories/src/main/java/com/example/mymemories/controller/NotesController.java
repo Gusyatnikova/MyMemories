@@ -76,11 +76,12 @@ public class NotesController {
     private void doInsert(String login, String title, String content, String resources) {
         SQLiteDatabase db = dataBaseHelper.getWritableDatabase();
 
-        Date currentDay = Calendar.getInstance().getTime();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+        String currentDay = sdf.format(Calendar.getInstance().getTime());
 
         ContentValues values = new ContentValues();
         values.put(NotesEntry.LOGIN, login);
-        values.put(NotesEntry.DATE, currentDay.toString());
+        values.put(NotesEntry.DATE, currentDay);
         values.put(NotesEntry.TITLE, title);
         values.put(NotesEntry.CONTENT, content);
         values.put(NotesEntry.RESOURCES, resources);
