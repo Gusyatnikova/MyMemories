@@ -43,6 +43,8 @@ public class Authorization extends AppCompatActivity {
         //Toast.makeText(view.getContext(), "Enter success", Toast.LENGTH_SHORT).show();
         notesController.addNote(_login, "Заметка", "Это интересная заметка", "C:");
         notesController.selectUserNotes(_login);
+        notesController.deleteNote(_login, "Заметка", "Это интересная заметка");
+        notesController.selectUserNotes(_login);
 
         Intent intent = new Intent(this, MainMenu.class);
         startActivity(intent);

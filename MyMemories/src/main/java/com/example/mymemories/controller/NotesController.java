@@ -8,8 +8,10 @@ import android.util.Log;
 
 import com.example.mymemories.model.NotesContract.NotesEntry;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 public class NotesController {
     private NotesDatabaseHelper dataBaseHelper;
@@ -25,6 +27,10 @@ public class NotesController {
 
     public void addNote(String login, String title, String content, String res){
         doInsert(login, title, content, res);
+    }
+
+    public void deleteNote(String login, String title, String content){
+        delete(login, title, content);
     }
 
     private void doSelect(String login){
@@ -70,8 +76,9 @@ public class NotesController {
     private void doInsert(String login, String title, String content, String resources) {
         SQLiteDatabase db = dataBaseHelper.getWritableDatabase();
 
-        ContentValues values = new ContentValues();
         Date currentDay = Calendar.getInstance().getTime();
+
+        ContentValues values = new ContentValues();
         values.put(NotesEntry.LOGIN, login);
         values.put(NotesEntry.DATE, currentDay.toString());
         values.put(NotesEntry.TITLE, title);
@@ -80,5 +87,18 @@ public class NotesController {
 
         db.insert(NotesEntry.TABLE_NAME, null, values);
         Log.d(LOG_TAG, "added");
+    }
+
+    /** Функция удаления записки пользователя из базы данных
+     *
+     * @param login
+     * @param title
+     * @param content
+     */
+
+    private void delete(String login, String title, String content){
+        SQLiteDatabase db = dataBaseHelper.getReadableDatabase();
+        db.delete(NotesEntry.TABLE_NAME, "Login=? and Title=? and Content=?",new String[]{login, title, content});
+        Log.d(LOG_TAG, "deleted");
     }
 }
