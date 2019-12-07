@@ -59,4 +59,8 @@ public class AuthorizationController {
             cursor.close();
         }
         return false;}
+
+    public String getEmail() {
+        return email;
+    }
 }
