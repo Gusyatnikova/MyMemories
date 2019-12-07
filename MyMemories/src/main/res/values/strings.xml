@@ -13,4 +13,6 @@
     <string name="enter">Войти</string>
     <string name="register">Не зарегистрированы? Зарегистрироваться</string>
     <string name="AddNote">+</string>
+    <string name="edit">edit</string>
+    <string name="delete">delete</string>
 </resources>
