@@ -5,19 +5,24 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.example.mymemories.model.AuthorizationContract;
+import com.example.mymemories.model.User;
 
 public class AuthorizationController {
     private AuthorizationDataBaseHelper dataBaseHelper;
+    private NotesController notesController;
     private String login;
     private String password;
     private String email;
+    private User user;
 
     public AuthorizationController(Context context) {
         dataBaseHelper = new AuthorizationDataBaseHelper(context);
+        notesController = new NotesController(context);
     }
 
     public void enter(String _login, String _password) throws CustomException{
         validate(_login, _password);
+        user = new User(login,password,email);
     }
 
     private void validate(String _login, String _password) throws CustomException{
@@ -62,5 +67,9 @@ public class AuthorizationController {
 
     public String getEmail() {
         return email;
+    }
+
+    public User getUser() {
+        return user;
     }
 }
