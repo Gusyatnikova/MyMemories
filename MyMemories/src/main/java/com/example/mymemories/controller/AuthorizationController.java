@@ -23,6 +23,7 @@ public class AuthorizationController {
     public void enter(String _login, String _password) throws CustomException{
         validate(_login, _password);
         user = new User(login,password,email);
+        user.setNotes(notesController.selectUserNotes(user.getLogin()));
     }
 
     private void validate(String _login, String _password) throws CustomException{
