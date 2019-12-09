@@ -16,9 +16,15 @@ public class Note {
         parseResources(Resources);
     }
 
-    //TODO парсинг строки ресурсов
+    /** Функция парсинга строки ресурсов
+     *
+     * @param res строка в виде путей к файлам ресурсов, разделенных символом "?"
+     */
     private void parseResources(String res){
-
+        String[] result = res.split("\\?");
+        for(String str: result){
+            resources.add(new File(str));
+        }
     }
 
     public String getTitle() {
@@ -53,3 +59,4 @@ public class Note {
         this.resources = resources;
     }
 }
+
