@@ -1,7 +1,6 @@
 package com.example.mymemories.view;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -10,6 +9,8 @@ import android.widget.Toast;
 import com.example.mymemories.R;
 import com.example.mymemories.controller.CustomException;
 import com.example.mymemories.controller.RegistrationController;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class RegistrationActivity extends AppCompatActivity {
     private EditText login;
@@ -39,7 +40,8 @@ public class RegistrationActivity extends AppCompatActivity {
             email.setText("");
             return;
         }
-        //Intent intent = new Intent(this, sdfsfd.class);
-        //startActivity(intent);
+        Toast.makeText(view.getContext(), "Success registration", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, Authorization.class);
+        startActivity(intent);
     }
 }
