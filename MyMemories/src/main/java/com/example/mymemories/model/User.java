@@ -4,14 +4,20 @@ import java.util.ArrayList;
 
 public class User {
     private String login;
+    private String password;
+    private String email;
     private ArrayList<Note> notes;
 
     public User(){
         login = null;
+        password = null;
+        email = null;
     }
 
-    public User(String Login){
+    public User(String Login, String Password, String Email){
         login = Login;
+        password = Password;
+        email = Email;
     }
 
     public String getLogin() {
