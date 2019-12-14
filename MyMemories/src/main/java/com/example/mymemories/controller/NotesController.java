@@ -6,11 +6,12 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import com.example.mymemories.model.Note;
 import com.example.mymemories.model.NotesContract.NotesEntry;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.Locale;
 
 public class NotesController {
@@ -21,8 +22,8 @@ public class NotesController {
         dataBaseHelper = new NotesDatabaseHelper(context);
     }
 
-    public void selectUserNotes(String login){
-        doSelect(login);
+    public ArrayList<Note> selectUserNotes(String login){
+        return doSelect(login);
     }
 
     public void addNote(String login, String title, String content, String res){
@@ -33,7 +34,9 @@ public class NotesController {
         delete(login, title, content);
     }
 
-    private void doSelect(String login){
+    private ArrayList<Note> doSelect(String login){
+        ArrayList<Note> arrayList = new ArrayList<>();
+        Note note;
         String selection;
         SQLiteDatabase db = dataBaseHelper.getReadableDatabase();
         String[] projection = {
@@ -55,14 +58,13 @@ public class NotesController {
                 String currentTitle = cursor.getString(cursor.getColumnIndex(NotesEntry.TITLE));
                 String currentContent = cursor.getString(cursor.getColumnIndex(NotesEntry.CONTENT));
                 String currentResources = cursor.getString(cursor.getColumnIndex(NotesEntry.RESOURCES));
-                Log.d(LOG_TAG, currentDate);
-                Log.d(LOG_TAG, currentTitle);
-                Log.d(LOG_TAG, currentContent);
-                Log.d(LOG_TAG, currentResources);
+                note = new Note(currentTitle,currentContent,currentDate,currentResources);
+                arrayList.add(note);
             }
         } finally {
             cursor.close();
         }
+        return arrayList;
     }
 
     /** Функция добавления записки пользователя в базу данных

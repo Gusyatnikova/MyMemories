@@ -67,4 +67,3 @@ public class Note {
         this.resources = resources;
     }
 }
-
