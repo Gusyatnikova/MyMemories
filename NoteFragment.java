@@ -19,6 +19,24 @@ public class NoteFragment extends ListFragment {
     private static final List<ShortNote> notes = new ArrayList<ShortNote>();
 
     static {
+        notes.add(new ShortNote("Заметка1", "12-12-2019"));
+        notes.add(new ShortNote("Заметка2", "12-12-2019"));
+        notes.add(new ShortNote("Заметка3", "13-12-2019"));
+        notes.add(new ShortNote("Заметка1", "12-12-2019"));
+        notes.add(new ShortNote("Заметка2", "12-12-2019"));
+        notes.add(new ShortNote("Заметка3", "13-12-2019"));
+        notes.add(new ShortNote("Заметка1", "12-12-2019"));
+        notes.add(new ShortNote("Заметка2", "12-12-2019"));
+        notes.add(new ShortNote("Заметка3", "13-12-2019"));
+        notes.add(new ShortNote("Заметка1", "12-12-2019"));
+        notes.add(new ShortNote("Заметка2", "12-12-2019"));
+        notes.add(new ShortNote("Заметка3", "13-12-2019"));
+        notes.add(new ShortNote("Заметка1", "12-12-2019"));
+        notes.add(new ShortNote("Заметка2", "12-12-2019"));
+        notes.add(new ShortNote("Заметка3", "13-12-2019"));
+        notes.add(new ShortNote("Заметка1", "12-12-2019"));
+        notes.add(new ShortNote("Заметка2", "12-12-2019"));
+        notes.add(new ShortNote("Заметка3", "13-12-2019"));
     }
 
     @Override
