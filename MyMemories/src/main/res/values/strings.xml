@@ -18,4 +18,5 @@
     <string name="title">Title</string>
     <string name="title1">Заголовок: </string>
     <string name="date">Дата: </string>
+    <string name="note">Note</string>
 </resources>
