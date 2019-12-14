@@ -1,9 +1,12 @@
 package com.example.mymemories.view;
 
-import androidx.appcompat.app.AppCompatActivity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+
 import com.example.mymemories.R;
-import com.example.mymemories.controller.NotesController;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class MainMenu extends AppCompatActivity {
 
@@ -11,5 +14,10 @@ public class MainMenu extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
+    }
+
+    public void edit(View view) {
+        Intent intent = new Intent(this, Edit.class);
+        startActivity(intent);
     }
 }

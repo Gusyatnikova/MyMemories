@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.MainMenu"
+        <activity android:name=".view.Edit"></activity>
+        <activity
+            android:name=".view.MainMenu"
             android:parentActivityName=".view.Authorization">
 
             <!-- The meta-data tag is required if you support API level 15 and lower -->
@@ -17,13 +19,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".view.Authorization" />
         </activity>
-        <activity android:name=".view.RegistrationActivity"
+        <activity
+            android:name=".view.RegistrationActivity"
             android:parentActivityName=".view.Authorization">
 
-        <!-- The meta-data tag is required if you support API level 15 and lower -->
-        <meta-data
-            android:name="android.support.PARENT_ACTIVITY"
-            android:value=".view.Authorization" />
+            <!-- The meta-data tag is required if you support API level 15 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".view.Authorization" />
         </activity>
         <activity
             android:name=".view.Authorization"

@@ -19,6 +19,7 @@ public class NoteFragment extends ListFragment {
     private static final List<ShortNote> notes = new ArrayList<ShortNote>();
 
     static {
+        notes.add(new ShortNote("Заметка", "14-12-2019"));
     }
 
     @Override
