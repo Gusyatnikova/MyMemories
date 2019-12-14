@@ -1,22 +1,53 @@
 package com.example.mymemories.view;
 
-import android.app.Fragment;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.TextView;
 
-import com.example.mymemories.R;
+import com.example.mymemories.model.ShortNote;
 
-import androidx.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.List;
 
-public class NoteFragment extends Fragment {
+import androidx.fragment.app.ListFragment;
 
-    @Nullable
+public class NoteFragment extends ListFragment {
+    private static final List<ShortNote> notes = new ArrayList<ShortNote>();
+
+    static {
+    }
+
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        //return super.onCreateView(inflater, container, savedInstanceState);
-        View rootView = inflater.inflate(R.layout.note_fragment, container, false);
-        return rootView;
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        ArrayAdapter<ShortNote> adapter = new NoteAdapter(this.getContext());
+        setListAdapter(adapter);
+    }
+
+    private class NoteAdapter extends ArrayAdapter<ShortNote> {
+
+        public NoteAdapter(Context context) {
+            super(context, android.R.layout.simple_list_item_2, notes);
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            ShortNote shortNote = getItem(position);
+
+            if (convertView == null) {
+                convertView = LayoutInflater.from(getContext())
+                        .inflate(android.R.layout.simple_list_item_2, null);
+            }
+            ((TextView) convertView.findViewById(android.R.id.text1))
+                    .setText(shortNote.title);
+            ((TextView) convertView.findViewById(android.R.id.text2))
+                    .setText(shortNote.date);
+            return convertView;
+        }
     }
 }
