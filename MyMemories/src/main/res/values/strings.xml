@@ -16,4 +16,6 @@
     <string name="edit">edit</string>
     <string name="delete">delete</string>
     <string name="title">Title</string>
+    <string name="title1">Заголовок: </string>
+    <string name="date">Дата: </string>
 </resources>
