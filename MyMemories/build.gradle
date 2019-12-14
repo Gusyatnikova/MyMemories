@@ -1,8 +1,14 @@
 plugins {
     id "org.sonarqube" version "2.7"
+    id "jacoco"
 }
 
 apply plugin: 'com.android.application'
+apply plugin: 'jacoco'
+
+jacoco {
+    toolVersion = "0.8.5"
+}
 
 android {
     compileSdkVersion 28
