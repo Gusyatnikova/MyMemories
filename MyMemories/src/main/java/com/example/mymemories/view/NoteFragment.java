@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.example.mymemories.model.ShortNote;
+import com.example.mymemories.model.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,16 +17,12 @@ import java.util.List;
 import androidx.fragment.app.ListFragment;
 
 public class NoteFragment extends ListFragment {
-    private static final List<ShortNote> notes = new ArrayList<ShortNote>();
-
-    static {
-        notes.add(new ShortNote("Заметка", "14-12-2019"));
-    }
+    private static List<ShortNote> notes = new ArrayList<ShortNote>();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        notes = User.getUser().getShortNotes();
         ArrayAdapter<ShortNote> adapter = new NoteAdapter(this.getContext());
         setListAdapter(adapter);
     }
