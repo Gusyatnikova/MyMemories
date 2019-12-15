@@ -8,11 +8,13 @@ public class Note {
     private String content;
     private String date;
     private ArrayList<File> resources;
+    private ShortNote shortNote;
 
     public Note(String Title, String Content, String Date, String Resources){
         title = Title;
         content = Content;
         date = Date;
+        shortNote = new ShortNote(title,date);
         parseResources(Resources);
     }
 
@@ -65,5 +67,9 @@ public class Note {
 
     public void setResources(ArrayList<File> resources) {
         this.resources = resources;
+    }
+
+    public ShortNote getShortNote() {
+        return shortNote;
     }
 }

@@ -12,12 +12,6 @@ public class User {
     private User(){
     }
 
-    /*public User(String Login, String Password, String Email){
-        login = Login;
-        password = Password;
-        email = Email;
-    }*/
-
     public static User getUser(){
         if(user == null)
             user = new User();
