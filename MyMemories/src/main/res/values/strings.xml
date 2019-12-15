@@ -19,4 +19,6 @@
     <string name="title1">Заголовок: </string>
     <string name="date">Дата: </string>
     <string name="note">Note</string>
+    <string name="save">Сохранить</string>
+    <string name="cancel">Отмена</string>
 </resources>
