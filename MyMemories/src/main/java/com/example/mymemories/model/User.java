@@ -45,4 +45,12 @@ public class User {
     public void setNotes(ArrayList<Note> notes) {
         this.notes = notes;
     }
+
+    public ArrayList<ShortNote> getShortNotes() {
+        ArrayList<ShortNote> shortNotes = new ArrayList<>();
+        for (Note note: notes) {
+            shortNotes.add(note.getShortNote());
+        }
+        return shortNotes;
+    }
 }
