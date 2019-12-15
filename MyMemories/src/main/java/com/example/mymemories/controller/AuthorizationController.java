@@ -13,7 +13,6 @@ public class AuthorizationController {
     private String login;
     private String password;
     private String email;
-    private User user;
 
     public AuthorizationController(Context context) {
         dataBaseHelper = new AuthorizationDataBaseHelper(context);
@@ -22,8 +21,10 @@ public class AuthorizationController {
 
     public void enter(String _login, String _password) throws CustomException{
         validate(_login, _password);
-        user = new User(login,password,email);
-        user.setNotes(notesController.selectUserNotes(user.getLogin()));
+        User.getUser().setLogin(login);
+        User.getUser().setPassword(password);
+        User.getUser().setEmail(email);
+        User.getUser().setNotes(notesController.selectUserNotes(User.getUser().getLogin()));
     }
 
     private void validate(String _login, String _password) throws CustomException{
@@ -68,9 +69,5 @@ public class AuthorizationController {
 
     public String getEmail() {
         return email;
-    }
-
-    public User getUser() {
-        return user;
     }
 }

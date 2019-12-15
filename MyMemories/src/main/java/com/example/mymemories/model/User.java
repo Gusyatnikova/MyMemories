@@ -3,21 +3,25 @@ package com.example.mymemories.model;
 import java.util.ArrayList;
 
 public class User {
+    private static User user;
     private String login;
     private String password;
     private String email;
     private ArrayList<Note> notes;
 
-    public User(){
-        login = null;
-        password = null;
-        email = null;
+    private User(){
     }
 
-    public User(String Login, String Password, String Email){
+    /*public User(String Login, String Password, String Email){
         login = Login;
         password = Password;
         email = Email;
+    }*/
+
+    public static User getUser(){
+        if(user == null)
+            user = new User();
+        return user;
     }
 
     public String getLogin() {
@@ -34,6 +38,14 @@ public class User {
 
     public void setNotes(Note note) {
         this.notes.add(note);
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public void setNotes(ArrayList<Note> notes) {
