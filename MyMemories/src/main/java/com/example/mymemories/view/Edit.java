@@ -47,4 +47,20 @@ public class Edit extends AppCompatActivity {
         date.setText(day);
     }
 
+    // отображаем диалоговое окно для выбора даты
+    public void setDate(View v) {
+        DatePickerDialog.OnDateSetListener listener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                day = dayOfMonth + "-" + month + "-" + year;
+                date.setText(day);
+            }
+        };
+        new DatePickerDialog(Edit.this, listener,
+                dateTime.get(Calendar.YEAR),
+                dateTime.get(Calendar.MONTH),
+                dateTime.get(Calendar.DAY_OF_MONTH))
+                .show();
+    }
+
 }
