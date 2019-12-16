@@ -54,6 +54,15 @@ public class User {
         return shortNotes;
     }
 
+    public String getContent(String uuid){
+        for(Note note : notes){
+            if(note.getUuid().toString().equals(uuid)){
+                return note.getContent();
+            }
+        }
+        return "";
+    }
+
     public void deleteNote(String uuid){
         for(Note note : notes){
             if(note.getUuid().toString().equals(uuid))
