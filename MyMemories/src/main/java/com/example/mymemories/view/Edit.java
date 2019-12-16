@@ -37,6 +37,15 @@ public class Edit extends AppCompatActivity {
         String className = getIntent().getStringExtra("Class");
         if(className.equals("MainMenu")){
             setInitialDateTime();
+        }else{
+            String Title = getIntent().getStringExtra("Title");
+            String Date = getIntent().getStringExtra("Date");
+            String Content = getIntent().getStringExtra("Content");
+            uuid = getIntent().getStringExtra("UUID");
+            title.setText(Title);
+            date.setText(Date);
+            day = Date;
+            content.setText(Content);
         }
     }
 
