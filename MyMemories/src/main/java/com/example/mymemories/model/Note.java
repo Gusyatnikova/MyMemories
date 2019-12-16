@@ -2,8 +2,10 @@ package com.example.mymemories.model;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.UUID;
 
 public class Note {
+    private final UUID uuid;
     private String title;
     private String content;
     private String date;
@@ -14,7 +16,8 @@ public class Note {
         title = Title;
         content = Content;
         date = Date;
-        shortNote = new ShortNote(title,date);
+        this.uuid = UUID.randomUUID();
+        shortNote = new ShortNote(title,date,uuid);
         parseResources(Resources);
     }
 
@@ -71,5 +74,9 @@ public class Note {
 
     public ShortNote getShortNote() {
         return shortNote;
+    }
+
+    public UUID getUuid() {
+        return uuid;
     }
 }
