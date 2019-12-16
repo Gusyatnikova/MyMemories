@@ -63,4 +63,14 @@ public class Edit extends AppCompatActivity {
                 .show();
     }
 
+    public void save(View view){
+        String Title = title.getText().toString();
+        String Content = content.getText().toString();
+        //TODO add resources from device
+        String resources="res";
+        User.getUser().addNote(new Note(Title,Content,day,resources));
+        Toast.makeText(view.getContext(), Title + " " + Content + " " + resources+" "+day+" added", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(view.getContext(), MainMenu.class);
+        startActivity(intent);
+    }
 }
