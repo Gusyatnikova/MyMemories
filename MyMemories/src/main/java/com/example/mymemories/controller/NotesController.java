@@ -78,7 +78,7 @@ public class NotesController {
     private void doInsert(String login, String title, String content, String resources) {
         SQLiteDatabase db = dataBaseHelper.getWritableDatabase();
 
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
         String currentDay = sdf.format(Calendar.getInstance().getTime());
 
         ContentValues values = new ContentValues();

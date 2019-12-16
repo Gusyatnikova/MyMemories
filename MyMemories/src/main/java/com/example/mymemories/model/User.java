@@ -30,7 +30,7 @@ public class User {
         this.login = login;
     }
 
-    public void setNotes(Note note) {
+    public void addNote(Note note) {
         this.notes.add(note);
     }
 
@@ -52,5 +52,21 @@ public class User {
             shortNotes.add(note.getShortNote());
         }
         return shortNotes;
+    }
+
+    public String getContent(String uuid){
+        for(Note note : notes){
+            if(note.getUuid().toString().equals(uuid)){
+                return note.getContent();
+            }
+        }
+        return "";
+    }
+
+    public void deleteNote(String uuid){
+        for(Note note : notes){
+            if(note.getUuid().toString().equals(uuid))
+                notes.remove(note);
+        }
     }
 }
