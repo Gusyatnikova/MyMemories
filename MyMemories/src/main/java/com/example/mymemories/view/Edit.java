@@ -25,6 +25,7 @@ public class Edit extends AppCompatActivity {
     private TextView date;
     private String day;
     private String uuid;
+    private String className;
     Calendar dateTime= Calendar.getInstance();
 
     @Override
@@ -34,7 +35,7 @@ public class Edit extends AppCompatActivity {
         title = findViewById(R.id.title);
         content = findViewById(R.id.content);
         date = findViewById(R.id.date);
-        String className = getIntent().getStringExtra("Class");
+        className = getIntent().getStringExtra("Class");
         if(className.equals("MainMenu")){
             setInitialDateTime();
         }else{
@@ -77,8 +78,13 @@ public class Edit extends AppCompatActivity {
         String Content = content.getText().toString();
         //TODO add resources from device
         String resources="res";
-        User.getUser().addNote(new Note(Title,Content,day,resources));
-        Toast.makeText(view.getContext(), Title + " " + Content + " " + resources+" "+day+" added", Toast.LENGTH_SHORT).show();
+        if(className.equals("MainMenu")) {
+            User.getUser().addNote(new Note(Title, Content, day, resources));
+            Toast.makeText(view.getContext(), Title + " " + Content + " " + resources+" "+day+" added", Toast.LENGTH_SHORT).show();
+        }else {
+            User.getUser().changeNote(Title, day, Content, resources, uuid);
+            Toast.makeText(view.getContext(), Title + " " + Content + " " + resources+" "+day+" changed", Toast.LENGTH_SHORT).show();
+        }
         Intent intent = new Intent(view.getContext(), MainMenu.class);
         startActivity(intent);
     }
