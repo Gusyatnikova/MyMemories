@@ -18,6 +18,7 @@ public class MainMenu extends AppCompatActivity {
 
     public void edit(View view) {
         Intent intent = new Intent(this, Edit.class);
+        intent.putExtra("Class", "MainMenu");
         startActivity(intent);
     }
 }
