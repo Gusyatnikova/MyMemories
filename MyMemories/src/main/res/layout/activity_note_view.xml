@@ -65,6 +65,25 @@
                     app:layout_constraintStart_toEndOf="@id/edit"
                     app:layout_constraintTop_toBottomOf="@id/date" />
 
+                <EditText
+                    android:id="@+id/content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="44dp"
+                    android:ems="10"
+                    android:text=""
+                    android:focusable="false"
+                    android:editable="false"
+                    android:gravity="top|left"
+                    android:hint="@string/note"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.391"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/date"
+                    />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
     </ScrollView>
