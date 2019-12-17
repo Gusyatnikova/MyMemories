@@ -28,6 +28,11 @@ public class NoteView extends AppCompatActivity {
     }
 
     public void initValues(){
-        //TODO
+        String Title = getIntent().getStringExtra("Title");
+        String Date = getIntent().getStringExtra("Date");
+        uuid = getIntent().getStringExtra("UUID");
+        title.setText(Title);
+        date.setText(Date);
+        content.setText(User.getUser().getContent(uuid));
     }
 }
