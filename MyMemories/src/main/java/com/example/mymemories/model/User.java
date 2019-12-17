@@ -69,4 +69,13 @@ public class User {
                 notes.remove(note);
         }
     }
+
+    public void changeNote(String Title, String Date, String Content, String res, String uuid){
+        for(Note note : notes){
+            if(note.getUuid().toString().equals(uuid)){
+                notes.remove(note);
+                notes.add(new Note(Title,Content,Date,res,uuid));
+            }
+        }
+    }
 }
