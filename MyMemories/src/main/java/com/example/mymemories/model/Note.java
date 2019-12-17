@@ -21,6 +21,15 @@ public class Note {
         parseResources(Resources);
     }
 
+    public Note(String Title, String Content, String Date, String Resources, String Uuid){
+        title = Title;
+        content = Content;
+        date = Date;
+        uuid = UUID.fromString(Uuid);
+        shortNote = new ShortNote(title,date,uuid);
+        parseResources(Resources);
+    }
+
     /** Функция парсинга строки ресурсов
      *
      * @param res строка в виде путей к файлам ресурсов, разделенных символом "?"
