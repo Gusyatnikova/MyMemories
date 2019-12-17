@@ -51,7 +51,19 @@
                     android:onClick="edit"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/date"
+                    app:layout_constraintEnd_toStartOf="@id/delete"
                     />
+
+                <ImageButton
+                    android:id="@+id/delete"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginLeft="15dp"
+                    android:background="@drawable/delete"
+                    android:onClick="delete"
+                    app:layout_constraintStart_toEndOf="@id/edit"
+                    app:layout_constraintTop_toBottomOf="@id/date" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
