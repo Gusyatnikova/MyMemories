@@ -1,10 +1,20 @@
 package com.example.mymemories.view;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.example.mymemories.model.ShortNote;
+import com.example.mymemories.model.User;
 import com.example.mymemories.R;
 import java.util.ArrayList;
 import java.util.HashMap;
+
+import androidx.annotation.NonNull;
 import androidx.fragment.app.ListFragment;
 
 public class NoteFragment extends ListFragment {
@@ -32,5 +42,19 @@ public class NoteFragment extends ListFragment {
             map.put("UUID", note.getUuid().toString());
             notes.add(map);
         }
+    }
+
+    @Override
+    public void onListItemClick(@NonNull ListView l, @NonNull View v, int position, long id) {
+        super.onListItemClick(l, v, position, id);
+        TextView title = v.findViewById(R.id.title);
+        TextView date = l.getChildAt(position).findViewById(R.id.date);
+        TextView uuid = v.findViewById(R.id.uuid);
+        Toast.makeText(getActivity(),title.getText().toString()+date.getText().toString()+uuid.getText().toString(),Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this.getContext(),NoteView.class);
+        intent.putExtra("Title", title.getText().toString());
+        intent.putExtra("Date", date.getText().toString());
+        intent.putExtra("UUID", uuid.getText().toString());
+        startActivity(intent);
     }
 }
