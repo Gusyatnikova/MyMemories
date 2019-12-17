@@ -41,4 +41,14 @@ public class NoteView extends AppCompatActivity {
         Intent intent = new Intent(this.getApplicationContext(),MainMenu.class);
         startActivity(intent);
     }
+
+    public void edit(View view){
+        Intent intent = new Intent(this.getApplicationContext(), Edit.class);
+        intent.putExtra("Class","NoteView");
+        intent.putExtra("Title",title.getText());
+        intent.putExtra("Date",date.getText());
+        intent.putExtra("Content",content.getText().toString());
+        intent.putExtra("UUID",uuid);
+        startActivity(intent);
+    }
 }
