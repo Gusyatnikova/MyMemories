@@ -24,6 +24,13 @@ public class NoteFragment extends ListFragment {
     }
 
     private void setNotes(){
-        //TODO
+        ArrayList<ShortNote> shortNotes = User.getUser().getShortNotes();
+        for(ShortNote note : shortNotes){
+            map = new HashMap<>();
+            map.put("Title",note.getTitle());
+            map.put("Date", note.getDate());
+            map.put("UUID", note.getUuid().toString());
+            notes.add(map);
+        }
     }
 }
