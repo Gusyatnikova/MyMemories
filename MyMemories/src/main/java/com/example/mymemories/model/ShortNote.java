@@ -1,11 +1,27 @@
 package com.example.mymemories.model;
 
-public class ShortNote {
-    public String title;
-    public String date;
+import java.util.UUID;
 
-    public ShortNote(String Title, String Date) {
+public class ShortNote {
+    private String title;
+    private String date;
+    private UUID uuid;
+
+    ShortNote(String Title, String Date, UUID Uuid) {
         title = Title;
         date = Date;
+        uuid = Uuid;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public UUID getUuid() {
+        return uuid;
     }
 }
