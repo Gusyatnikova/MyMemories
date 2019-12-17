@@ -35,4 +35,10 @@ public class NoteView extends AppCompatActivity {
         date.setText(Date);
         content.setText(User.getUser().getContent(uuid));
     }
+
+    public void delete(View view){
+        User.getUser().deleteNote(uuid);
+        Intent intent = new Intent(this.getApplicationContext(),MainMenu.class);
+        startActivity(intent);
+    }
 }
