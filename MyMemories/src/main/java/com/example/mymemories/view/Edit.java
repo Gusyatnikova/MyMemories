@@ -82,7 +82,7 @@ public class Edit extends AppCompatActivity {
         Intent intent = new Intent(view.getContext(), MainMenu.class);
         startActivity(intent);
     }
-	
+
     public void cancel(View view){
         Intent intent = new Intent(view.getContext(),MainMenu.class);
         startActivity(intent);

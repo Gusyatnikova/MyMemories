@@ -8,9 +8,10 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.mymemories.R;
 import com.example.mymemories.model.ShortNote;
 import com.example.mymemories.model.User;
-import com.example.mymemories.R;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
