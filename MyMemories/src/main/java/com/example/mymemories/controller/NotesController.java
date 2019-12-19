@@ -30,6 +30,10 @@ public class NotesController {
         doInsert(uuid, login, title, content, date, res);
     }
 
+    public void updateNote(String uuid, String login, String title, String content, String date, String res){
+        doUpdate(uuid, login, title, content, date, res);
+    }
+
     public void deleteNote(String uuid) {
         delete(uuid);
     }
@@ -94,6 +98,18 @@ public class NotesController {
 
         db.insert(NotesEntry.TABLE_NAME, null, values);
         Log.d(LOG_TAG, "added");
+    }
+
+    private void doUpdate(String uuid, String login, String title, String content, String date, String resources){
+        SQLiteDatabase db = dataBaseHelper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(NotesEntry.TITLE, title);
+        values.put(NotesEntry.CONTENT, content);
+        values.put(NotesEntry.DATE, date);
+        values.put(NotesEntry.RESOURCES, resources);
+        db.update(NotesEntry.TABLE_NAME,
+                values,
+                NotesEntry.UUID + "= ? AND " + NotesEntry.LOGIN + "= ?", new String[]{uuid,login});
     }
 
     /**
