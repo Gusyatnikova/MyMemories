@@ -2,7 +2,10 @@ package com.example.mymemories.view;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -17,6 +20,15 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
+    public ArrayList<String> getResString(String uuid){
+        for(Note note : notes){
+            if(note.getUuid().toString().equals(uuid)){
+                return note.getResources();
+            }
+        }
+        return null;
+    }
+
 import androidx.appcompat.app.AppCompatActivity;
 
 public class Edit extends AppCompatActivity {
@@ -26,7 +38,11 @@ public class Edit extends AppCompatActivity {
     private String day;
     private String uuid;
     private String className;
+    private EditText resources;
+    private StringBuilder res;
     Calendar dateTime= Calendar.getInstance();
+    static final int RESOURCES_REQUEST = 1;
+    private final static String LOG_TAG = "Edit";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +51,8 @@ public class Edit extends AppCompatActivity {
         title = findViewById(R.id.title);
         content = findViewById(R.id.content);
         date = findViewById(R.id.date);
+        resources = findViewById(R.id.resources);
+        res = new StringBuilder();
         className = getIntent().getStringExtra("Class");
         if(className.equals("MainMenu")){
             setInitialDateTime();
@@ -76,14 +94,13 @@ public class Edit extends AppCompatActivity {
     public void save(View view){
         String Title = title.getText().toString();
         String Content = content.getText().toString();
-        //TODO add resources from device
-        String resources="res";
+        String Resources=resources.getText().toString();
         if(className.equals("MainMenu")) {
-            User.getUser().addNote(new Note(Title, Content, day, resources));
-            Toast.makeText(view.getContext(), Title + " " + Content + " " + resources+" "+day+" added", Toast.LENGTH_SHORT).show();
+            User.getUser().addNote(new Note(Title, Content, day, Resources));
+            Toast.makeText(view.getContext(), Title + " " + Content + " " + Resources+" "+day+" added", Toast.LENGTH_SHORT).show();
         }else {
-            User.getUser().changeNote(Title, day, Content, resources, uuid);
-            Toast.makeText(view.getContext(), Title + " " + Content + " " + resources+" "+day+" changed", Toast.LENGTH_SHORT).show();
+            User.getUser().changeNote(Title, day, Content, Resources, uuid);
+            Toast.makeText(view.getContext(), Title + " " + Content + " " + Resources+" "+day+" changed", Toast.LENGTH_SHORT).show();
         }
         Intent intent = new Intent(view.getContext(), MainMenu.class);
         startActivity(intent);
@@ -93,4 +110,12 @@ public class Edit extends AppCompatActivity {
         Intent intent = new Intent(view.getContext(),MainMenu.class);
         startActivity(intent);
     }
+
+    public void addPicture(View view){
+        Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
+        photoPickerIntent.setType("image/*");
+        startActivityForResult(photoPickerIntent, RESOURCES_REQUEST);
+    }
 }
+
+
