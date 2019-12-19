@@ -109,6 +109,20 @@
                     </LinearLayout>
                 </HorizontalScrollView>
 
+                <HorizontalScrollView
+                    android:id="@+id/hview1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/hview">
+
+                    <LinearLayout
+                        android:id="@+id/video_gallery"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                    </LinearLayout>
+                </HorizontalScrollView>
+
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
     </ScrollView>
