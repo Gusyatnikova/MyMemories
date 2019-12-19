@@ -1,5 +1,6 @@
 package com.example.mymemories.view;
 
+        import android.content.DialogInterface;
         import android.content.Intent;
         import android.graphics.Bitmap;
         import android.media.MediaPlayer;
@@ -23,6 +24,7 @@ package com.example.mymemories.view;
         import java.io.IOException;
         import java.util.ArrayList;
 
+        import android.app.AlertDialog;
         import androidx.appcompat.app.AppCompatActivity;
 
 public class NoteView extends AppCompatActivity {
@@ -38,6 +40,7 @@ public class NoteView extends AppCompatActivity {
     ImageButton play, pause, stop, prev, next;
     ArrayList<String> audios;
     int iterator;
+    AlertDialog.Builder alert;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -219,10 +222,26 @@ public class NoteView extends AppCompatActivity {
         }
     }
 
-    public void delete(View view) {
-        User.getUser().deleteNote(uuid);
-        Intent intent = new Intent(this.getApplicationContext(), MainMenu.class);
-        startActivity(intent);
+    public void delete(final View view) {
+        alert = new android.app.AlertDialog.Builder(view.getContext());
+        alert.setTitle("Удаление заметки");
+        alert.setMessage("Вы действительно хотите удалить заметку?");
+        alert.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                User.getUser().deleteNote(uuid);
+                dialog.dismiss();
+                Intent intent = new Intent(view.getContext(), MainMenu.class);
+                startActivity(intent);
+            }
+        });
+
+        alert.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        alert.show();
     }
 
     public void edit(View view) {
