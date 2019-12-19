@@ -99,7 +99,7 @@ public class Edit extends AppCompatActivity {
         } else {
             Note note = new Note(Title, day, Content, Resources,uuid);
             User.getUser().changeNote(Title, day, Content, Resources, uuid);
-            notesController.updateNote(note.getTitle(),User.getUser().getLogin(),note.getTitle(),note.getContent(),note.getDate(),note.getResString());
+            notesController.updateNote(note.getUuid().toString(), User.getUser().getLogin(), note.getTitle(),note.getContent(),note.getDate(),note.getResString());
             Toast.makeText(view.getContext(), Title + " " + Content + " " + Resources + " " + day + " changed", Toast.LENGTH_SHORT).show();
         }
         Intent intent = new Intent(view.getContext(), MainMenu.class);
