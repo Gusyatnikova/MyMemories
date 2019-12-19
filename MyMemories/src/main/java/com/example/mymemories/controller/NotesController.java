@@ -9,10 +9,7 @@ import android.util.Log;
 import com.example.mymemories.model.Note;
 import com.example.mymemories.model.NotesContract.NotesEntry;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Locale;
 
 public class NotesController {
     private NotesDatabaseHelper dataBaseHelper;
@@ -103,13 +100,15 @@ public class NotesController {
     private void doUpdate(String uuid, String login, String title, String content, String date, String resources){
         SQLiteDatabase db = dataBaseHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
+        values.put(NotesEntry.UUID, uuid);
+        values.put(NotesEntry.LOGIN, login);
+        values.put(NotesEntry.DATE, date);
         values.put(NotesEntry.TITLE, title);
         values.put(NotesEntry.CONTENT, content);
-        values.put(NotesEntry.DATE, date);
         values.put(NotesEntry.RESOURCES, resources);
         db.update(NotesEntry.TABLE_NAME,
                 values,
-                NotesEntry.UUID + "= ? AND " + NotesEntry.LOGIN + "= ?", new String[]{uuid,login});
+                NotesEntry.UUID + " = ? AND " + NotesEntry.LOGIN + " = ?", new String[]{uuid,login});
     }
 
     /**
@@ -120,7 +119,7 @@ public class NotesController {
 
     private void delete(String uuid) {
         SQLiteDatabase db = dataBaseHelper.getReadableDatabase();
-        db.delete(NotesEntry.TABLE_NAME, "UUID=?", new String[]{uuid});
+        db.delete(NotesEntry.TABLE_NAME, "UUID = ?", new String[]{uuid});
         Log.d(LOG_TAG, "deleted");
     }
 }
