@@ -1,18 +1,23 @@
 package com.example.mymemories.view;
 
         import android.content.Intent;
+        import android.graphics.Bitmap;
         import android.media.MediaPlayer;
         import android.net.Uri;
         import android.os.Bundle;
+        import android.provider.MediaStore;
+        import android.view.Gravity;
         import android.view.View;
         import android.widget.EditText;
         import android.widget.ImageButton;
+        import android.widget.ImageView;
         import android.widget.LinearLayout;
         import android.widget.TextView;
 
         import com.example.mymemories.R;
         import com.example.mymemories.model.User;
 
+        import java.io.IOException;
         import java.util.ArrayList;
 
         import androidx.appcompat.app.AppCompatActivity;
@@ -105,7 +110,25 @@ public class NoteView extends AppCompatActivity {
     }
 
     public View insertImage(String uri){
-        //TODO
+        Bitmap bitmap = null;
+        LinearLayout layout = null;
+        try {
+            bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), Uri.parse(uri));
+            layout = new LinearLayout(getApplicationContext());
+            layout.setLayoutParams(new LinearLayout.LayoutParams(350, 350));
+            layout.setGravity(Gravity.CENTER);
+
+            ImageView imageView = new ImageView(getApplicationContext());
+            imageView.setLayoutParams(new LinearLayout.LayoutParams(345, 345));
+            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+            imageView.setImageBitmap(bitmap);
+
+            layout.addView(imageView);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return layout;
     }
 
     public View insertVideo(String uri){
