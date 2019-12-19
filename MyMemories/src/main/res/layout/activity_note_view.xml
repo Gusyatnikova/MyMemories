@@ -41,6 +41,17 @@
                     android:layout_marginStart="20dp"
                     android:layout_marginLeft="20dp" />
 
+                <TextView
+                    android:id="@+id/uuid"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text=""
+                    android:visibility="invisible"
+                    app:layout_constraintStart_toEndOf="@id/date"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/title">
+                </TextView>
+
                 <ImageButton
                     android:id="@+id/edit"
                     android:layout_height="wrap_content"
@@ -83,6 +94,91 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/date"
                     />
+
+                <HorizontalScrollView
+                    android:id="@+id/hview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/content">
+
+                    <LinearLayout
+                        android:id="@+id/gallery"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                    </LinearLayout>
+                </HorizontalScrollView>
+
+                <HorizontalScrollView
+                    android:id="@+id/hview1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/hview">
+
+                    <LinearLayout
+                        android:id="@+id/video_gallery"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                    </LinearLayout>
+                </HorizontalScrollView>
+
+                <ImageButton
+                    android:id="@+id/prev"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/next"
+                    android:onClick="prev"
+                    app:layout_constraintTop_toBottomOf="@id/hview1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/play">
+                </ImageButton>
+
+                <ImageButton
+                    android:id="@+id/play"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/play1"
+                    android:rotation="90"
+                    android:onClick="play"
+                    app:layout_constraintStart_toEndOf="@id/prev"
+                    app:layout_constraintTop_toBottomOf="@id/hview1"
+                    app:layout_constraintEnd_toStartOf="@id/pause">
+                </ImageButton>
+
+                <ImageButton
+                    android:id="@+id/pause"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/pause"
+                    android:onClick="pause"
+                    app:layout_constraintStart_toEndOf="@id/play"
+                    app:layout_constraintEnd_toStartOf="@id/stop"
+                    app:layout_constraintTop_toBottomOf="@id/hview1">
+                </ImageButton>
+
+                <ImageButton
+                    android:id="@+id/stop"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/stop"
+                    android:onClick="stop"
+                    app:layout_constraintEnd_toStartOf="@id/next"
+                    app:layout_constraintStart_toEndOf="@id/pause"
+                    app:layout_constraintTop_toBottomOf="@id/hview1">
+                </ImageButton>
+
+                <ImageButton
+                    android:id="@+id/next"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/next"
+                    android:rotation="180"
+                    android:onClick="next"
+                    app:layout_constraintTop_toBottomOf="@id/hview1"
+                    app:layout_constraintStart_toEndOf="@id/stop"
+                    app:layout_constraintEnd_toEndOf="parent">
+                </ImageButton>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
