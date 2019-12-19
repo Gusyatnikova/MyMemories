@@ -1,5 +1,7 @@
 package com.example.mymemories.model;
 
+import android.net.Uri;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.UUID;
@@ -9,7 +11,8 @@ public class Note {
     private String title;
     private String content;
     private String date;
-    private ArrayList<File> resources;
+    private ArrayList<String> resources;
+    private String resString;
     private ShortNote shortNote;
 
     public Note(String Title, String Content, String Date, String Resources){
@@ -17,6 +20,8 @@ public class Note {
         content = Content;
         date = Date;
         this.uuid = UUID.randomUUID();
+        resString = Resources;
+        resources = new ArrayList<>();
         shortNote = new ShortNote(title,date,uuid);
         parseResources(Resources);
     }
@@ -26,6 +31,8 @@ public class Note {
         content = Content;
         date = Date;
         uuid = UUID.fromString(Uuid);
+        resString = Resources;
+        resources = new ArrayList<>();
         shortNote = new ShortNote(title,date,uuid);
         parseResources(Resources);
     }
@@ -37,8 +44,8 @@ public class Note {
     private void parseResources(String res){
         String[] result = res.split("\\?");
         for(String str: result){
-            if(str != null && checkIfFileExists(str))
-                resources.add(new File(str));
+            if(str != null)
+                resources.add(str);
         }
     }
 
@@ -61,7 +68,7 @@ public class Note {
         return date;
     }
 
-    public ArrayList<File> getResources() {
+    public ArrayList<String> getResources() {
         return resources;
     }
 
@@ -77,8 +84,13 @@ public class Note {
         this.date = date;
     }
 
-    public void setResources(ArrayList<File> resources) {
+    public void setResources(ArrayList<String> resources) {
         this.resources = resources;
+    }
+
+    public void setResFromStr(String Res){
+        resString = Res;
+        parseResources(Res);
     }
 
     public ShortNote getShortNote() {
