@@ -124,6 +124,22 @@ public class Edit extends AppCompatActivity {
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Audio.Media.EXTERNAL_CONTENT_URI);
         startActivityForResult(intent, RESOURCES_REQUEST);
     }
+	 @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent returnedIntent) {
+        super.onActivityResult(requestCode, resultCode, returnedIntent);
+        if (resultCode == RESULT_OK) {
+            Uri selectedRes = returnedIntent.getData();
+            if (selectedRes != null) {
+                res.append(selectedRes.toString());
+                res.append("?");
+                resources.setText(res.toString());
+                //Log.i(LOG_TAG,res.toString());
+                Toast.makeText(this.getApplicationContext(), resources.getText().toString(), Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this.getApplicationContext(), "Nothing was selected", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
 }
 
 
