@@ -70,6 +70,15 @@ public class User {
         }
         return "";
     }
+	
+	public ArrayList<String> getResString(String uuid){
+        for(Note note : notes){
+            if(note.getUuid().toString().equals(uuid)){
+                return note.getResources();
+            }
+        }
+        return null;
+    }
 
     public void deleteNote(String uuid){
         for(Note note : notes){
