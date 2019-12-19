@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mymemories.R;
+import com.example.mymemories.controller.NotesController;
 import com.example.mymemories.model.Note;
 import com.example.mymemories.model.User;
 
@@ -31,6 +32,7 @@ public class Edit extends AppCompatActivity {
     private String className;
     private EditText resources;
     private StringBuilder res;
+    private NotesController notesController;
     Calendar dateTime = Calendar.getInstance();
     static final int RESOURCES_REQUEST = 1;
     private final static String LOG_TAG = "Edit";
@@ -44,6 +46,7 @@ public class Edit extends AppCompatActivity {
         date = findViewById(R.id.date);
         resources = findViewById(R.id.resources);
         res = new StringBuilder();
+        notesController = new NotesController(this.getApplicationContext());
         className = getIntent().getStringExtra("Class");
         if (className.equals("MainMenu")) {
             setInitialDateTime();
@@ -89,10 +92,14 @@ public class Edit extends AppCompatActivity {
         String Content = content.getText().toString();
         String Resources = resources.getText().toString();
         if (className.equals("MainMenu")) {
-            User.getUser().addNote(new Note(Title, Content, day, Resources));
+            Note note = new Note(Title, Content, day, Resources);
+            User.getUser().addNote(note);
+            notesController.addNote(note.getUuid().toString(),User.getUser().getLogin(),note.getTitle(),note.getContent(),note.getDate(),note.getResString());
             Toast.makeText(view.getContext(), Title + " " + Content + " " + Resources + " " + day + " added", Toast.LENGTH_SHORT).show();
         } else {
+            Note note = new Note(Title, day, Content, Resources,uuid);
             User.getUser().changeNote(Title, day, Content, Resources, uuid);
+            notesController.updateNote(note.getTitle(),User.getUser().getLogin(),note.getTitle(),note.getContent(),note.getDate(),note.getResString());
             Toast.makeText(view.getContext(), Title + " " + Content + " " + Resources + " " + day + " changed", Toast.LENGTH_SHORT).show();
         }
         Intent intent = new Intent(view.getContext(), MainMenu.class);
@@ -137,5 +144,3 @@ public class Edit extends AppCompatActivity {
         }
     }
 }
-
-
