@@ -9,11 +9,11 @@ public class User {
     private String email;
     private ArrayList<Note> notes;
 
-    private User(){
+    private User() {
     }
 
-    public static User getUser(){
-        if(user == null)
+    public static User getUser() {
+        if (user == null)
             user = new User();
         return user;
     }
@@ -31,7 +31,7 @@ public class User {
     }
 
     public void addNote(Note note) {
-        if(notes == null)
+        if (notes == null)
             notes = new ArrayList<>();
         this.notes.add(note);
     }
@@ -58,42 +58,51 @@ public class User {
 
     public ArrayList<ShortNote> getShortNotes() {
         ArrayList<ShortNote> shortNotes = new ArrayList<>();
-        for (Note note: notes) {
+        for (Note note : notes) {
             shortNotes.add(note.getShortNote());
         }
         return shortNotes;
     }
 
-    public String getContent(String uuid){
-        for(Note note : notes){
-            if(note.getUuid().toString().equals(uuid)){
+    public String getContent(String uuid) {
+        for (Note note : notes) {
+            if (note.getUuid().toString().equals(uuid)) {
                 return note.getContent();
             }
         }
         return "";
     }
-	
-	public ArrayList<String> getResString(String uuid){
-        for(Note note : notes){
-            if(note.getUuid().toString().equals(uuid)){
+
+    public ArrayList<String> getResources(String uuid) {
+        for (Note note : notes) {
+            if (note.getUuid().toString().equals(uuid)) {
                 return note.getResources();
             }
         }
         return null;
     }
 
-    public void deleteNote(String uuid){
-        for(Note note : notes){
-            if(note.getUuid().toString().equals(uuid))
+    public String getResString(String uuid) {
+        for (Note note : notes) {
+            if (note.getUuid().toString().equals(uuid)) {
+                return note.getResString();
+            }
+        }
+        return null;
+    }
+
+    public void deleteNote(String uuid) {
+        for (Note note : notes) {
+            if (note.getUuid().toString().equals(uuid))
                 notes.remove(note);
         }
     }
 
-    public void changeNote(String Title, String Date, String Content, String res, String uuid){
-        for(Note note : notes){
-            if(note.getUuid().toString().equals(uuid)){
+    public void changeNote(String Title, String Date, String Content, String res, String uuid) {
+        for (Note note : notes) {
+            if (note.getUuid().toString().equals(uuid)) {
                 notes.remove(note);
-                notes.add(new Note(Title,Content,Date,res,uuid));
+                notes.add(new Note(Title, Content, Date, res, uuid));
             }
         }
     }

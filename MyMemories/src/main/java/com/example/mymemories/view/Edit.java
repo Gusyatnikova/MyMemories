@@ -19,6 +19,7 @@ import com.example.mymemories.model.User;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 public class Edit extends AppCompatActivity {
@@ -30,7 +31,7 @@ public class Edit extends AppCompatActivity {
     private String className;
     private EditText resources;
     private StringBuilder res;
-    Calendar dateTime= Calendar.getInstance();
+    Calendar dateTime = Calendar.getInstance();
     static final int RESOURCES_REQUEST = 1;
     private final static String LOG_TAG = "Edit";
 
@@ -44,13 +45,15 @@ public class Edit extends AppCompatActivity {
         resources = findViewById(R.id.resources);
         res = new StringBuilder();
         className = getIntent().getStringExtra("Class");
-        if(className.equals("MainMenu")){
+        if (className.equals("MainMenu")) {
             setInitialDateTime();
-        }else{
+        } else {
             String Title = getIntent().getStringExtra("Title");
             String Date = getIntent().getStringExtra("Date");
             String Content = getIntent().getStringExtra("Content");
             uuid = getIntent().getStringExtra("UUID");
+            res.append(getIntent().getStringExtra("Resources"));
+            resources.setText(res.toString());
             title.setText(Title);
             date.setText(Date);
             day = Date;
@@ -81,40 +84,43 @@ public class Edit extends AppCompatActivity {
                 .show();
     }
 
-    public void save(View view){
+    public void save(View view) {
         String Title = title.getText().toString();
         String Content = content.getText().toString();
-        String Resources=resources.getText().toString();
-        if(className.equals("MainMenu")) {
+        String Resources = resources.getText().toString();
+        if (className.equals("MainMenu")) {
             User.getUser().addNote(new Note(Title, Content, day, Resources));
-            Toast.makeText(view.getContext(), Title + " " + Content + " " + Resources+" "+day+" added", Toast.LENGTH_SHORT).show();
-        }else {
+            Toast.makeText(view.getContext(), Title + " " + Content + " " + Resources + " " + day + " added", Toast.LENGTH_SHORT).show();
+        } else {
             User.getUser().changeNote(Title, day, Content, Resources, uuid);
-            Toast.makeText(view.getContext(), Title + " " + Content + " " + Resources+" "+day+" changed", Toast.LENGTH_SHORT).show();
+            Toast.makeText(view.getContext(), Title + " " + Content + " " + Resources + " " + day + " changed", Toast.LENGTH_SHORT).show();
         }
         Intent intent = new Intent(view.getContext(), MainMenu.class);
         startActivity(intent);
     }
 
-    public void cancel(View view){
-        Intent intent = new Intent(view.getContext(),MainMenu.class);
+    public void cancel(View view) {
+        Intent intent = new Intent(view.getContext(), MainMenu.class);
         startActivity(intent);
     }
 
-    public void addPicture(View view){
+    public void addPicture(View view) {
         Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
         photoPickerIntent.setType("image/*");
         startActivityForResult(photoPickerIntent, RESOURCES_REQUEST);
     }
-	public void addVideo(View view){
+
+    public void addVideo(View view) {
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Video.Media.EXTERNAL_CONTENT_URI);
         startActivityForResult(intent, RESOURCES_REQUEST);
     }
-    public void addMusic(View view){
+
+    public void addMusic(View view) {
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Audio.Media.EXTERNAL_CONTENT_URI);
         startActivityForResult(intent, RESOURCES_REQUEST);
     }
-	 @Override
+
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent returnedIntent) {
         super.onActivityResult(requestCode, resultCode, returnedIntent);
         if (resultCode == RESULT_OK) {

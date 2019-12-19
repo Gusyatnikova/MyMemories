@@ -29,12 +29,12 @@ public class Authorization extends AppCompatActivity {
         notesController = new NotesController(this.getApplicationContext());
     }
 
-    public void authorization(View view){
+    public void authorization(View view) {
         String _login = login.getText().toString();
         String _password = password.getText().toString();
-        try{
-            controller.enter(_login,_password);
-        }catch (CustomException e){
+        try {
+            controller.enter(_login, _password);
+        } catch (CustomException e) {
             Toast.makeText(view.getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
             login.setText("");
             password.setText("");
@@ -50,7 +50,7 @@ public class Authorization extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void register(View view){
+    public void register(View view) {
         Intent intent = new Intent(this, RegistrationActivity.class);
         startActivity(intent);
     }

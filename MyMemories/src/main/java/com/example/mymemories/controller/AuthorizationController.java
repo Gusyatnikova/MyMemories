@@ -19,7 +19,7 @@ public class AuthorizationController {
         notesController = new NotesController(context);
     }
 
-    public void enter(String _login, String _password) throws CustomException{
+    public void enter(String _login, String _password) throws CustomException {
         validate(_login, _password);
         User.getUser().setLogin(login);
         User.getUser().setPassword(password);
@@ -27,14 +27,14 @@ public class AuthorizationController {
         User.getUser().setNotes(notesController.selectUserNotes(User.getUser().getLogin()));
     }
 
-    private void validate(String _login, String _password) throws CustomException{
+    private void validate(String _login, String _password) throws CustomException {
         if (_login.isEmpty() || _password.isEmpty())
             throw new CustomException("Fields mustn't be empty");
-        else if(!doSelect(_login, _password))
+        else if (!doSelect(_login, _password))
             throw new CustomException("Wrong login or password");
     }
 
-    private boolean doSelect(String _login, String _password){
+    private boolean doSelect(String _login, String _password) {
         String selection;
         SQLiteDatabase db = dataBaseHelper.getReadableDatabase();
         String[] projection = {
@@ -65,7 +65,8 @@ public class AuthorizationController {
         } finally {
             cursor.close();
         }
-        return false;}
+        return false;
+    }
 
     public String getEmail() {
         return email;
