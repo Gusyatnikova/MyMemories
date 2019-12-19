@@ -1,31 +1,32 @@
 package com.example.mymemories.view;
 
-        import android.content.DialogInterface;
-        import android.content.Intent;
-        import android.graphics.Bitmap;
-        import android.media.MediaPlayer;
-        import android.net.Uri;
-        import android.os.Bundle;
-        import android.provider.MediaStore;
-        import android.view.Gravity;
-        import android.view.View;
-        import android.widget.EditText;
-        import android.widget.ImageButton;
-        import android.widget.ImageView;
-        import android.widget.LinearLayout;
-        import android.widget.MediaController;
-        import android.widget.TextView;
-        import android.widget.Toast;
-        import android.widget.VideoView;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.media.MediaPlayer;
+import android.net.Uri;
+import android.os.Bundle;
+import android.provider.MediaStore;
+import android.view.Gravity;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.MediaController;
+import android.widget.TextView;
+import android.widget.Toast;
+import android.widget.VideoView;
 
-        import com.example.mymemories.R;
-        import com.example.mymemories.model.User;
+import com.example.mymemories.R;
+import com.example.mymemories.controller.NotesController;
+import com.example.mymemories.model.User;
 
-        import java.io.IOException;
-        import java.util.ArrayList;
+import java.io.IOException;
+import java.util.ArrayList;
 
-        import android.app.AlertDialog;
-        import androidx.appcompat.app.AppCompatActivity;
+import android.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class NoteView extends AppCompatActivity {
     TextView title;
@@ -41,6 +42,7 @@ public class NoteView extends AppCompatActivity {
     ArrayList<String> audios;
     int iterator;
     AlertDialog.Builder alert;
+    NotesController notesController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +62,10 @@ public class NoteView extends AppCompatActivity {
         next = findViewById(R.id.next);
         pause.setEnabled(false);
         stop.setEnabled(false);
+        play.setEnabled(false);
+        prev.setEnabled(false);
+        next.setEnabled(false);
+        notesController = new NotesController(this.getApplicationContext());
         initValues();
     }
 
@@ -73,10 +79,14 @@ public class NoteView extends AppCompatActivity {
         content.setText(User.getUser().getContent(uuid));
         res = User.getUser().getResources(uuid);
         ArrayList<String> images = getResources(uuid, "image");
-        if (images.size() != 0) {
-            for (String img : images) {
-                gallery.addView(insertImage(img));
+        try {
+            if (images.size() != 0) {
+                for (String img : images) {
+                    gallery.addView(insertImage(img));
+                }
             }
+        }catch(IllegalArgumentException e){
+            Toast.makeText(this.getApplicationContext(),"Wrong uri to image. Please, check that this image exists!",Toast.LENGTH_SHORT).show();
         }
         ArrayList<String> videos = getResources(uuid, "video");
         if (videos.size() != 0) {
@@ -87,20 +97,23 @@ public class NoteView extends AppCompatActivity {
         audios = getResources(uuid, "audio");
         if (audios.size() != 0) {
             iterator = 0;
-            audioPlayer = MediaPlayer.create(this.getApplicationContext(), Uri.parse(audios.get(iterator)));
-            audioPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                @Override
-                public void onCompletion(MediaPlayer mp) {
-                    stopPlay();
+            try {
+                audioPlayer = MediaPlayer.create(this.getApplicationContext(), Uri.parse(audios.get(iterator)));
+                if (audioPlayer != null) {
+                    audioPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mp) {
+                            stopPlay();
+                        }
+                    });
+                    play.setEnabled(true);
+                    next.setEnabled(true);
+                    prev.setEnabled(true);
                 }
-            });
-            play.setEnabled(true);
-        } else {
-            play.setEnabled(false);
-            pause.setEnabled(false);
-            stop.setEnabled(false);
-            next.setEnabled(false);
-            prev.setEnabled(false);
+            }catch (IllegalArgumentException e){
+                Toast.makeText(this.getApplicationContext(),"Wrong uri to audio. Please, check that this audio exists!",Toast.LENGTH_SHORT).show();
+                audioPlayer = null;
+            }
         }
     }
 
@@ -115,7 +128,7 @@ public class NoteView extends AppCompatActivity {
         return result;
     }
 
-    public View insertImage(String uri) {
+    public View insertImage(String uri) throws IllegalArgumentException{
         Bitmap bitmap = null;
         LinearLayout layout = null;
         try {
@@ -137,7 +150,7 @@ public class NoteView extends AppCompatActivity {
         return layout;
     }
 
-    public View insertVideo(String uri) {
+    public View insertVideo(String uri){
         LinearLayout layout = null;
         layout = new LinearLayout(getApplicationContext());
         layout.setLayoutParams(new LinearLayout.LayoutParams(350, 350));
@@ -151,7 +164,6 @@ public class NoteView extends AppCompatActivity {
         videoPlay.setOnErrorListener(myVideoViewErrorListener);
         videoPlay.setLayoutParams(new LinearLayout.LayoutParams(345, 345));
         videoPlay.requestFocus();
-        videoPlay.start();
         layout.addView(videoPlay);
         return layout;
     }
@@ -229,6 +241,7 @@ public class NoteView extends AppCompatActivity {
         alert.setPositiveButton("YES", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 User.getUser().deleteNote(uuid);
+                notesController.deleteNote(uuid);
                 dialog.dismiss();
                 Intent intent = new Intent(view.getContext(), MainMenu.class);
                 startActivity(intent);
@@ -284,7 +297,7 @@ public class NoteView extends AppCompatActivity {
         @Override
         public boolean onError(MediaPlayer arg0, int arg1, int arg2) {
             Toast.makeText(getApplicationContext(),
-                    "Error!!!",
+                    "Wrong uri for video file. Please, check if video file exists",
                     Toast.LENGTH_LONG).show();
             return true;
         }
