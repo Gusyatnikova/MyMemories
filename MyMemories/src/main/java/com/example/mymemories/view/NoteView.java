@@ -166,6 +166,13 @@ public class NoteView extends AppCompatActivity {
         }
     }
 
+    public void play(View view) {
+        audioPlayer.start();
+        play.setEnabled(false);
+        pause.setEnabled(true);
+        stop.setEnabled(true);
+    }
+
     public void delete(View view){
         User.getUser().deleteNote(uuid);
         Intent intent = new Intent(this.getApplicationContext(),MainMenu.class);
