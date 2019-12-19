@@ -38,6 +38,14 @@ public class User {
         this.password = password;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
     public void setEmail(String email) {
         this.email = email;
     }
@@ -61,6 +69,15 @@ public class User {
             }
         }
         return "";
+    }
+	
+	public ArrayList<String> getResString(String uuid){
+        for(Note note : notes){
+            if(note.getUuid().toString().equals(uuid)){
+                return note.getResources();
+            }
+        }
+        return null;
     }
 
     public void deleteNote(String uuid){
