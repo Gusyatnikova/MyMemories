@@ -34,11 +34,11 @@ public class NoteFragment extends ListFragment {
         setListAdapter(adapter);
     }
 
-    private void setNotes(){
+    private void setNotes() {
         ArrayList<ShortNote> shortNotes = User.getUser().getShortNotes();
-        for(ShortNote note : shortNotes){
+        for (ShortNote note : shortNotes) {
             map = new HashMap<>();
-            map.put("Title",note.getTitle());
+            map.put("Title", note.getTitle());
             map.put("Date", note.getDate());
             map.put("UUID", note.getUuid().toString());
             notes.add(map);
@@ -51,8 +51,8 @@ public class NoteFragment extends ListFragment {
         TextView title = v.findViewById(R.id.title);
         TextView date = l.getChildAt(position).findViewById(R.id.date);
         TextView uuid = v.findViewById(R.id.uuid);
-        Toast.makeText(getActivity(),title.getText().toString()+date.getText().toString()+uuid.getText().toString(),Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(this.getContext(),NoteView.class);
+        Toast.makeText(getActivity(), title.getText().toString() + date.getText().toString() + uuid.getText().toString(), Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this.getContext(), NoteView.class);
         intent.putExtra("Title", title.getText().toString());
         intent.putExtra("Date", date.getText().toString());
         intent.putExtra("UUID", uuid.getText().toString());

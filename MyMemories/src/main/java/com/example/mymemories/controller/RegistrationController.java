@@ -20,19 +20,19 @@ public class RegistrationController {
         dataBaseHelper = new AuthorizationDataBaseHelper(context);
     }
 
-    public void registrate(String _login, String _password, String _email) throws CustomException{
-        if(validate(_login, _password, _email))
+    public void registrate(String _login, String _password, String _email) throws CustomException {
+        if (validate(_login, _password, _email))
             doInsert(_login, _password, _email);
     }
 
-    private boolean validate(String _login, String _password, String _email) throws CustomException{
+    private boolean validate(String _login, String _password, String _email) throws CustomException {
         if (_login.isEmpty() || _password.isEmpty() || _email.isEmpty())
             throw new CustomException("Field mustn't be empty");
-        else if(_password.length() < 6)
+        else if (_password.length() < 6)
             throw new CustomException("Password must be longer than 6 characters");
-        else if(!isValidEmail(_email))
+        else if (!isValidEmail(_email))
             throw new CustomException("Wrong e-mail address");
-        else if(doSelect(_login, _password))
+        else if (doSelect(_login, _password))
             throw new CustomException("This login is already used");
         else return true;
     }
@@ -41,14 +41,15 @@ public class RegistrationController {
         return (!TextUtils.isEmpty(target)) && android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
     }
 
-    /**Функция нахождения в базе данных е-мейла по логину и паролю
+    /**
+     * Функция нахождения в базе данных е-мейла по логину и паролю
      * Используется также для проверки дублирования логинов
      *
      * @param _login
      * @param _password
      * @return
      */
-    private boolean doSelect(String _login, String _password){
+    private boolean doSelect(String _login, String _password) {
         String selection;
         SQLiteDatabase db = dataBaseHelper.getReadableDatabase();
         String[] projection = {
@@ -82,9 +83,11 @@ public class RegistrationController {
         } finally {
             cursor.close();
         }
-        return false;}
+        return false;
+    }
 
-    /** Функция добавления пользователя в базу данных
+    /**
+     * Функция добавления пользователя в базу данных
      *
      * @param _login
      * @param _password
@@ -102,14 +105,15 @@ public class RegistrationController {
         db.insert(AuthorizationEntry.TABLE_NAME, null, values);
     }
 
-    /** Функция удаления пользователя из базы данных
+    /**
+     * Функция удаления пользователя из базы данных
      *
      * @param _login
      * @param _password
      */
 
-    public void delete(String _login, String _password){
+    public void delete(String _login, String _password) {
         SQLiteDatabase db = dataBaseHelper.getReadableDatabase();
-        db.delete(AuthorizationEntry.TABLE_NAME, "Login=? and Password=?",new String[]{_login, _password});
+        db.delete(AuthorizationEntry.TABLE_NAME, "Login=? and Password=?", new String[]{_login, _password});
     }
 }

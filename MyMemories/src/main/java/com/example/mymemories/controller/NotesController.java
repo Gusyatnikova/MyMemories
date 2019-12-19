@@ -22,19 +22,19 @@ public class NotesController {
         dataBaseHelper = new NotesDatabaseHelper(context);
     }
 
-    public ArrayList<Note> selectUserNotes(String login){
+    public ArrayList<Note> selectUserNotes(String login) {
         return doSelect(login);
     }
 
-    public void addNote(String login, String title, String content, String res){
+    public void addNote(String login, String title, String content, String res) {
         doInsert(login, title, content, res);
     }
 
-    public void deleteNote(String login, String title, String content){
+    public void deleteNote(String login, String title, String content) {
         delete(login, title, content);
     }
 
-    private ArrayList<Note> doSelect(String login){
+    private ArrayList<Note> doSelect(String login) {
         ArrayList<Note> arrayList = new ArrayList<>();
         Note note;
         String selection;
@@ -58,7 +58,7 @@ public class NotesController {
                 String currentTitle = cursor.getString(cursor.getColumnIndex(NotesEntry.TITLE));
                 String currentContent = cursor.getString(cursor.getColumnIndex(NotesEntry.CONTENT));
                 String currentResources = cursor.getString(cursor.getColumnIndex(NotesEntry.RESOURCES));
-                note = new Note(currentTitle,currentContent,currentDate,currentResources);
+                note = new Note(currentTitle, currentContent, currentDate, currentResources);
                 arrayList.add(note);
             }
         } finally {
@@ -67,7 +67,8 @@ public class NotesController {
         return arrayList;
     }
 
-    /** Функция добавления записки пользователя в базу данных
+    /**
+     * Функция добавления записки пользователя в базу данных
      *
      * @param login
      * @param title
@@ -92,16 +93,17 @@ public class NotesController {
         Log.d(LOG_TAG, "added");
     }
 
-    /** Функция удаления записки пользователя из базы данных
+    /**
+     * Функция удаления записки пользователя из базы данных
      *
      * @param login
      * @param title
      * @param content
      */
 
-    private void delete(String login, String title, String content){
+    private void delete(String login, String title, String content) {
         SQLiteDatabase db = dataBaseHelper.getReadableDatabase();
-        db.delete(NotesEntry.TABLE_NAME, "Login=? and Title=? and Content=?",new String[]{login, title, content});
+        db.delete(NotesEntry.TABLE_NAME, "Login=? and Title=? and Content=?", new String[]{login, title, content});
         Log.d(LOG_TAG, "deleted");
     }
 }

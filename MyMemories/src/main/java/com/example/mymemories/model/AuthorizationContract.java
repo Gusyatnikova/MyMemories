@@ -5,7 +5,8 @@ import android.provider.BaseColumns;
 public final class AuthorizationContract {
     // To prevent someone from accidentally instantiating the contract class,
     // make the constructor private.
-    private AuthorizationContract() {}
+    private AuthorizationContract() {
+    }
 
     /* Inner class that defines the table contents */
     public static class AuthorizationEntry implements BaseColumns {

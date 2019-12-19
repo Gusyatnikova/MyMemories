@@ -27,13 +27,14 @@ public class RegistrationActivity extends AppCompatActivity {
         email = findViewById(R.id.email);
         controller = new RegistrationController(this.getApplicationContext());
     }
-    public void registrate(View view){
+
+    public void registrate(View view) {
         String _login = login.getText().toString();
         String _pswd = pswd.getText().toString();
         String _email = email.getText().toString();
-        try{
+        try {
             controller.registrate(_login, _pswd, _email);
-        }catch(CustomException e){
+        } catch (CustomException e) {
             Toast.makeText(view.getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
             login.setText("");
             pswd.setText("");
