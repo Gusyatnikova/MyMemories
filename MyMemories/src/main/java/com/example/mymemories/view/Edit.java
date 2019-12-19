@@ -116,6 +116,10 @@ public class Edit extends AppCompatActivity {
         photoPickerIntent.setType("image/*");
         startActivityForResult(photoPickerIntent, RESOURCES_REQUEST);
     }
+	public void addVideo(View view){
+        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Video.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(intent, RESOURCES_REQUEST);
+    }
 }
 
 
