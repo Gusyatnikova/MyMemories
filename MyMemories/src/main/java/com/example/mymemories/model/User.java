@@ -31,6 +31,8 @@ public class User {
     }
 
     public void addNote(Note note) {
+        if(notes == null)
+            notes = new ArrayList<>();
         this.notes.add(note);
     }
 
