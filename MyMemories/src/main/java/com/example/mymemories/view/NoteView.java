@@ -12,7 +12,9 @@ package com.example.mymemories.view;
         import android.widget.ImageButton;
         import android.widget.ImageView;
         import android.widget.LinearLayout;
+        import android.widget.MediaController;
         import android.widget.TextView;
+        import android.widget.VideoView;
 
         import com.example.mymemories.R;
         import com.example.mymemories.model.User;
@@ -132,7 +134,22 @@ public class NoteView extends AppCompatActivity {
     }
 
     public View insertVideo(String uri){
-        //TODO
+        LinearLayout layout = null;
+        layout = new LinearLayout(getApplicationContext());
+        layout.setLayoutParams(new LinearLayout.LayoutParams(350, 350));
+        layout.setGravity(Gravity.CENTER);
+
+        VideoView videoPlay = new VideoView(getApplicationContext());
+        videoPlay.setVideoURI(Uri.parse(uri));
+        videoPlay.setMediaController(new MediaController(this));
+        videoPlay.setOnCompletionListener(myVideoViewCompletionListener);
+        videoPlay.setOnPreparedListener(MyVideoViewPreparedListener);
+        videoPlay.setOnErrorListener(myVideoViewErrorListener);
+        videoPlay.setLayoutParams(new LinearLayout.LayoutParams(345, 345));
+        videoPlay.requestFocus();
+        videoPlay.start();
+        layout.addView(videoPlay);
+        return layout;
     }
 
     private void stopPlay(){
