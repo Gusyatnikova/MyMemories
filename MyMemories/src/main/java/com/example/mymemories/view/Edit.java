@@ -120,6 +120,10 @@ public class Edit extends AppCompatActivity {
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Video.Media.EXTERNAL_CONTENT_URI);
         startActivityForResult(intent, RESOURCES_REQUEST);
     }
+    public void addMusic(View view){
+        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Audio.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(intent, RESOURCES_REQUEST);
+    }
 }
 
 
