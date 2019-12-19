@@ -196,4 +196,15 @@ public class NoteView extends AppCompatActivity {
         }
     };
 
+    MediaPlayer.OnErrorListener myVideoViewErrorListener
+            = new MediaPlayer.OnErrorListener() {
+
+        @Override
+        public boolean onError(MediaPlayer arg0, int arg1, int arg2) {
+            Toast.makeText(getApplicationContext(),
+                    "Error!!!",
+                    Toast.LENGTH_LONG).show();
+            return true;
+        }
+    };
 }
