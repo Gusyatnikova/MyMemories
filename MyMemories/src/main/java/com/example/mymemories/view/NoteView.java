@@ -184,4 +184,16 @@ public class NoteView extends AppCompatActivity {
         }
     };
 
+    MediaPlayer.OnPreparedListener MyVideoViewPreparedListener
+            = new MediaPlayer.OnPreparedListener() {
+
+        @Override
+        public void onPrepared(MediaPlayer arg0) {
+            Toast.makeText(getApplicationContext(),
+                    "Media file is loaded and ready to go",
+                    Toast.LENGTH_LONG).show();
+
+        }
+    };
+
 }
