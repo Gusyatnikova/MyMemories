@@ -94,7 +94,14 @@ public class NoteView extends AppCompatActivity {
     }
 
     public ArrayList<String> getResources(String uuid, String cont){
-        //TODO
+        ArrayList<String> resources = User.getUser().getResString(uuid);
+        ArrayList<String> result = new ArrayList<>();
+        for (String str : resources) {
+            if (str.contains(cont)) {
+                result.add(str);
+            }
+        }
+        return result;
     }
 
     public View insertImage(String uri){
