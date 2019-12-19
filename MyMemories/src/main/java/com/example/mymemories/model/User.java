@@ -1,6 +1,7 @@
 package com.example.mymemories.model;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class User {
     private static User user;
@@ -92,18 +93,22 @@ public class User {
     }
 
     public void deleteNote(String uuid) {
-        for (Note note : notes) {
-            if (note.getUuid().toString().equals(uuid))
-                notes.remove(note);
+        Iterator<Note> noteIterator = notes.iterator();
+        while(noteIterator.hasNext()){
+            Note note = noteIterator.next();
+            if(note.getUuid().toString().equals(uuid))
+                noteIterator.remove();
         }
     }
 
     public void changeNote(String Title, String Date, String Content, String res, String uuid) {
-        for (Note note : notes) {
-            if (note.getUuid().toString().equals(uuid)) {
-                notes.remove(note);
-                notes.add(new Note(Title, Content, Date, res, uuid));
+        Iterator<Note> noteIterator = notes.iterator();
+        while(noteIterator.hasNext()){
+            Note note = noteIterator.next();
+            if(note.getUuid().toString().equals(uuid)){
+                noteIterator.remove();
             }
         }
+        notes.add(new Note(Title, Content, Date, res, uuid));
     }
 }
