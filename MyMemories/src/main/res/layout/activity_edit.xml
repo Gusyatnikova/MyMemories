@@ -109,6 +109,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/galery"
+                    android:onClick="addPicture"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/video"
                     app:layout_constraintTop_toBottomOf="@+id/content" />
@@ -118,6 +119,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/video"
+                    android:onClick="addVideo"
                     app:layout_constraintStart_toEndOf="@+id/addpic"
                     app:layout_constraintEnd_toStartOf="@id/music"
                     app:layout_constraintTop_toBottomOf="@+id/content" />
@@ -127,9 +129,27 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/music"
+                    android:onClick="addMusic"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/video"
                     app:layout_constraintTop_toBottomOf="@+id/content" />
+
+                <EditText
+                    android:id="@+id/resources"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="35dp"
+                    android:hint="@string/resources"
+                    android:inputType="textMultiLine"
+                    android:gravity="top|left"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:layout_editor_absoluteX="87dp"
+                    tools:layout_editor_absoluteY="44dp"
+                    app:layout_constraintTop_toBottomOf="@id/addpic">
+                </EditText>
 
                 <Button
                     android:id="@+id/save"
@@ -139,7 +159,7 @@
                     android:text="@string/save"
                     app:layout_constraintEnd_toStartOf="@id/cancel"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/addpic" />
+                    app:layout_constraintTop_toBottomOf="@id/resources" />
 
                 <Button
                     android:id="@+id/cancel"
@@ -149,10 +169,11 @@
                     android:text="@string/cancel"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/save"
-                    app:layout_constraintTop_toBottomOf="@id/addpic" />
+                    app:layout_constraintTop_toBottomOf="@id/resources" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
     </ScrollView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
