@@ -97,7 +97,7 @@ public class Edit extends AppCompatActivity {
             notesController.addNote(note.getUuid().toString(),User.getUser().getLogin(),note.getTitle(),note.getContent(),note.getDate(),note.getResString());
             Toast.makeText(view.getContext(), Title + " " + Content + " " + Resources + " " + day + " added", Toast.LENGTH_SHORT).show();
         } else {
-            Note note = new Note(Title, day, Content, Resources,uuid);
+            Note note = new Note(Title, Content, day, Resources, uuid);
             User.getUser().changeNote(Title, day, Content, Resources, uuid);
             notesController.updateNote(note.getUuid().toString(), User.getUser().getLogin(), note.getTitle(),note.getContent(),note.getDate(),note.getResString());
             Toast.makeText(view.getContext(), Title + " " + Content + " " + Resources + " " + day + " changed", Toast.LENGTH_SHORT).show();
