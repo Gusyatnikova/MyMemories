@@ -154,7 +154,16 @@ public class NoteView extends AppCompatActivity {
     }
 
     private void stopPlay(){
-        //TODO
+        audioPlayer.stop();
+        pause.setEnabled(false);
+        stop.setEnabled(false);
+        try {
+            audioPlayer.prepare();
+            audioPlayer.seekTo(0);
+            play.setEnabled(true);
+        } catch (Throwable t) {
+            Toast.makeText(this, t.getMessage(), Toast.LENGTH_SHORT).show();
+        }
     }
 
     public void delete(View view){
