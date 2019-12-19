@@ -13,6 +13,7 @@ public final class NotesContract {
         public static final String TABLE_NAME = "notes";
 
         public static final String _ID = BaseColumns._ID;
+        public static final String UUID = "UUID";
         public static final String LOGIN = "Login";
         public static final String DATE = "Date";
         public static final String TITLE = "Title";

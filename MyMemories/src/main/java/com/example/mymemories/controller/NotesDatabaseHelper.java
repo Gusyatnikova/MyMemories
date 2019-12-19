@@ -8,7 +8,7 @@ import com.example.mymemories.model.NotesContract.NotesEntry;
 
 public class NotesDatabaseHelper extends SQLiteOpenHelper {
     // If you change the database schema, you must increment the database version.
-    public static final int DATABASE_VERSION = 1;
+    public static final int DATABASE_VERSION = 2;
     public static final String DATABASE_NAME = "Notes.db";
 
     public NotesDatabaseHelper(Context context) {
@@ -19,9 +19,10 @@ public class NotesDatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         String SQL_CREATE_ENTRIES = "CREATE TABLE " + NotesEntry.TABLE_NAME + " (" +
                 NotesEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+                NotesEntry.UUID + " TEXT NOT NULL," +
                 NotesEntry.LOGIN + " TEXT NOT NULL," +
                 NotesEntry.DATE + " DATE NOT NULL," +
-                NotesEntry.TITLE + " TEXT NOT NULL," +
+                NotesEntry.TITLE + " TEXT," +
                 NotesEntry.CONTENT + " TEXT," +
                 NotesEntry.RESOURCES + " TEXT)";
         db.execSQL(SQL_CREATE_ENTRIES);
