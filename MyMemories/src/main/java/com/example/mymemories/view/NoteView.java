@@ -14,6 +14,7 @@ package com.example.mymemories.view;
         import android.widget.LinearLayout;
         import android.widget.MediaController;
         import android.widget.TextView;
+        import android.widget.Toast;
         import android.widget.VideoView;
 
         import com.example.mymemories.R;
@@ -171,4 +172,16 @@ public class NoteView extends AppCompatActivity {
         intent.putExtra("UUID",uuid);
         startActivity(intent);
     }
+
+    MediaPlayer.OnCompletionListener myVideoViewCompletionListener
+            = new MediaPlayer.OnCompletionListener() {
+
+        @Override
+        public void onCompletion(MediaPlayer arg0) {
+            Toast.makeText(getApplicationContext(),
+                    "End of Video",
+                    Toast.LENGTH_LONG).show();
+        }
+    };
+
 }
