@@ -19,16 +19,6 @@ import com.example.mymemories.model.User;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
-
-    public ArrayList<String> getResString(String uuid){
-        for(Note note : notes){
-            if(note.getUuid().toString().equals(uuid)){
-                return note.getResources();
-            }
-        }
-        return null;
-    }
-
 import androidx.appcompat.app.AppCompatActivity;
 
 public class Edit extends AppCompatActivity {
