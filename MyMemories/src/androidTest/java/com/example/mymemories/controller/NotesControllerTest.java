@@ -10,11 +10,13 @@ import static org.junit.Assert.assertEquals;
 
 public class NotesControllerTest {
 
+    String uuid;
+
     @After
     public void deletesNote(){
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
         NotesController controller = new NotesController(appContext);
-        controller.deleteNote("Ann", "Заметка", "Заметка");
+        controller.deleteNote(uuid);
     }
 
     @Test
@@ -23,9 +25,12 @@ public class NotesControllerTest {
         String title = "Заметка";
         String content = "Заметка";
         String resources = "C:file";
+        String date = "12-12-2019";
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
         NotesController controller = new NotesController(appContext);
-        controller.addNote(login, title, content, resources);
+        Note note = new Note(title,content,date,resources);
+        uuid = note.getUuid().toString();
+        controller.addNote(uuid, login, title, content, date, resources);
         ArrayList<Note> notes = controller.selectUserNotes(login);
         assertEquals("Заметка", notes.get(0).getTitle());
     }

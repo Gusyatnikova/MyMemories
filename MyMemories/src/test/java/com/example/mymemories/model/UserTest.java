@@ -32,8 +32,9 @@ public class UserTest {
 
     @Test
     public void addNote() {
-        User.getUser().addNote(new Note("Title","Content","12-12-2019","C:"));
-        assertEquals("Title",User.getUser().getNotes().get(0).getTitle());
+        Note note = new Note("Title","Content","12-12-2019","C:");
+        User.getUser().addNote(note);
+        assertEquals("Content",User.getUser().getContent(note.getUuid().toString()));
     }
 
     @Test
