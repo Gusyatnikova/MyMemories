@@ -61,5 +61,6 @@ public class RegistrationControllerTest {
         String email = "sdfsd@gmail.com";
         RegistrationController controller = new RegistrationController(appContext);
         controller.registrate(login,pswd,email);
+        controller.registrate(login,pswd,email);
     }
 }
